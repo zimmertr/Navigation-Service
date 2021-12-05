@@ -16,7 +16,10 @@ $> python3 app.py 8.681495,49.41461 8.687872,49.420318
 ## Requirements
 
 * [Python 3](https://www.python.org/downloads/)
-* [Requests Python Module](https://docs.python-requests.org/en/latest/user/install/)
+* Python Modules: 
+  * [Requests](https://docs.python-requests.org/en/latest/user/install/)
+  * [Flask](https://flask.palletsprojects.com/en/2.0.x/installation/)
+
 
 ## Instructions
 
