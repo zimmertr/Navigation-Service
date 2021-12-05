@@ -1,0 +1,21 @@
+09:50AM: 
+	- Reading instructions
+	- Reviewing Devise gem 
+	
+10:02AM: 
+	- Creating repo
+	- Cloning OpenRouteService
+	- Downloading Heidelberg OSM
+	- Reviewing ORS & Heidelberg dataset 
+
+10:15AM:
+	- Standing up OpenRouteService locally
+	- Reviewing OpenRouteService API docs to learn how to format requests 
+
+10:24AM: 
+	- Received first successful response using curl
+	- Writing basic python script to do the same thing
+
+11:00AM:
+	- Python accepts coordinate pairs & OpenRouteService API, has basic error handling, and successfully returns JSON blob containing driving directions
+	- Pushing first commit to GitHub

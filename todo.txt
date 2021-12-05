@@ -1,0 +1,33 @@
+Goal: Build an app for navigating from curPos to trailHead. 
+
+Infrastructure:
+	- Running in Kubernetes
+	- NGINX Proxy in front
+
+Application:
+	- Ruby/Rails
+	- CRUD
+		- Create Accounts
+		- Log In via Devise gem
+	- Port 3000
+
+ToDo:
+	- Build a "Navigation Service"
+		- Receives 2x lat/lon pairs
+		- Returns driving directions from A to B
+			- Use OpenRouteService
+			- Use Heidelberg OSM sample
+	- Write an Nginx.conf
+		- Route to Navigation Service or Rails
+
+Deliverables:
+	- Nginx.conf
+	- Dockerfile
+	- Navigation Service Code
+	- Kubernetes YAML
+	- README
+		- Navigation API explanation
+		- Diagram of resources & Architecture
+		- How to deploy
+		- How to test
+		- Challenges, Changes, Difficulty
