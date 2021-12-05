@@ -19,3 +19,14 @@
 11:00AM:
 	- Python accepts coordinate pairs & OpenRouteService API, has basic error handling, and successfully returns JSON blob containing driving directions
 	- Pushing first commit to GitHub
+
+11:17AM: 
+	- Setting up basic Flask server
+	- Successfully received response 
+	- Adding basic error handling
+
+11:42AM: 
+	- Lunch Break
+
+12:23PM: 
+	- Pushing changes to GitHub
