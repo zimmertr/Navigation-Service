@@ -4,7 +4,17 @@
 
 ## Summary
 
-Navigation Service is a Python application that receives two coordinate pairs and leverages [OpenRouteService](https://github.com/GIScience/openrouteservice) to determine driving directions between them. 
+Navigation Service is a Python application with a [Flask](https://flask.palletsprojects.com/en/2.0.x/) web frontend that is used to determine driving directions between two coordinate pairs. Flask listens for incoming requests to `/directions` and when one is received, it leverages the [Requests](https://docs.python-requests.org/en/latest/) HTTP library to invoke a secondary request to an instance of [OpenRouteService](https://github.com/GIScience/openrouteservice). The applicaion accepts three parameters, `start`, `end`, and `server` which represent the respective coordinate pairs as well as the URL where OpenRouteService can be found. There is basic error handling that will detect when an invalid API path or parameters are used.
+
+Navigation Service can be deployed in a multitude of ways. Included is a `Dockerfile` for building it as well as a `Docker-Compose` file for running it. It also has support for running on Kubernetes via an example `Kustomization` overlay. Or it can simply be ran locally on a workstation using `Python3`. Instructions are provided below for each use case. 
+
+If one intends to deploy the Navigation Service into production the solution leveraging Kubernetes is recommended. Furthermore, they should consider the following elements to improve reliability & security:
+
+* Use multiple replicas of the Navigation Service to ensure high availability. 
+* Use a [managed instance](https://openrouteservice.org/plans/) of OpenRouteService or otherwise ensure it is also highly available. 
+  * If you are self hosting OpenRouteService, ensure that you properly provide [JAVA_OPTS and CATALINE_OPTS](https://github.com/GIScience/openrouteservice/blob/master/docker/docker-compose.yml#L22) to your deployment to ensure proper resource and security configurations are enforced. Similarly, ensure that you provide Persistent Volumes for the [necessary directories](https://github.com/GIScience/openrouteservice/blob/master/docker/docker-compose.yml#L15) associated with your graphs, logs, configuration, etc. You might also consider ensuring that the workload is NOT run as the root user, whether it is deployed on a dedicated server or within a container. 
+
+The Navigation Service can be tested. To get started I would recommend using [PyTest](https://docs.pytest.org/en/6.2.x/) and the Werkzeug test [`Client`](https://werkzeug.palletsprojects.com/en/2.0.x/test/#werkzeug.test.Client). This harness will allow you to automate the testing of authentication, various invalid and valid responses, contexts, and more. The Flask project provides extensive documentation on this procedure [here](https://flask.palletsprojects.com/en/2.0.x/testing/). 
 
 ## Example
 
@@ -24,8 +34,6 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
   * [Docker-Compose](https://docs.docker.com/compose/install/)
   * [Kubernetes](https://kubernetes.io/docs/setup/)
   * [MetalLB](https://metallb.universe.tf/installation/)
-
-
 
 ## Instructions
 
@@ -121,5 +129,12 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
 | `end`    | Ending Coordinate Pair             |
 | `server` | OpenRouteService API Server to Use |
 
+## TODO
 
-
+* Build NGINX configuration for proxying requests to each service 
+* Build a diagram for the network and infrastructure topology
+* Add additional production considerations to the Summary
+* Add unit testing examples
+* Test OpenRouteService with additional OSM datasets 
+* Test scaling with multiple replicas in Kubernetes 
+* Lean on TLS & NGINX to enforce authentication to the Navigation Service & encryption between it and the OpenRouteService. 

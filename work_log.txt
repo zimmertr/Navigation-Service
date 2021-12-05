@@ -34,13 +34,18 @@
 	- Creating Docker-Compose
 	- Modifying Flask to listen on 0.0.0.0
 
-01:30PM
+01:30PM:
 	- Testing & Updating README
 	- Pushing changes to GitHub
 
-01:50PM
+01:50PM:
 	- Building Kubernetes manifests & Kustomization
 	- Troubleshooting networking issues (Accidentally added the same label to both deployments with Kustomize and made my LB service attach to both :facepalm:)
 	- Testing app on Kubernetes
 	- Updating documentation
+	- Pushing changes to GitHub
+
+02:35PM:
+	- Reviewing additional requirements
+	- Adding notes about how the API is designed and deployed, some recommendations for a production deployment, and how one might test the solution. 
 	- Pushing changes to GitHub
