@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ors-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ors-app
+  template:
+    metadata:
+      labels:
+        app: ors-app
+    spec:
+      containers:
+        - name: ors-app
+          image: openrouteservice/openrouteservice
+          ports:
+            - name: "ors-api"
+              containerPort: 8080
+              protocol: TCP

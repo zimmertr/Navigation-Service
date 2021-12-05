@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ors-app
+  name: ors-app
+spec:
+  selector:
+    app: ors-app
+  ports:
+  - name: "ors-api"
+    targetPort: 8080
+    port: 8080

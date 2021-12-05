@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nav-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nav-svc
+  template:
+    metadata:
+      labels:
+        app: nav-svc
+    spec:
+      containers:
+        - name: nav-svc
+          image: zimmertr/nav-svc
+          ports:
+            - name: "nav-api"
+              containerPort: 5000
+              protocol: TCP
