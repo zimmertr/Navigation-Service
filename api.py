@@ -21,4 +21,4 @@ def not_found(error):
 	return "Invalid API path was provided!"
 
 if __name__ == '__main__':
-	api.run()
+	api.run(host='0.0.0.0')
