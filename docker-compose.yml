@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  ors-app:
+    container_name: ors-app
+    ports:
+      - 8080:8080
+    image: openrouteservice/openrouteservice
+    user: "${ORS_UID:-0}:${ORS_GID:-0}"
+  nav-svc:
+    container_name: nav-svc
+    ports:
+      - 5000:5000
+    image: navigation-service
+    build: .

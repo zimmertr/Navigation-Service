@@ -30,3 +30,10 @@
 
 12:23PM: 
 	- Pushing changes to GitHub
+	- Creating Dockerfile
+	- Creating Docker-Compose
+	- Modifying Flask to listen on 0.0.0.0
+
+01:30PM
+	- Testing & Updating README
+	- Pushing changes to GitHub
