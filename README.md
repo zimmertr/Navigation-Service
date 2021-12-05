@@ -22,12 +22,14 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
 * Optional
   * [Docker](https://docs.docker.com/get-docker/)
   * [Docker-Compose](https://docs.docker.com/compose/install/)
+  * [Kubernetes](https://kubernetes.io/docs/setup/)
+  * [MetalLB](https://metallb.universe.tf/installation/)
 
 
 
 ## Instructions
 
-### Using Docker-Compose:
+### Using Docker & Docker-Compose:
 
 1. Build & run the infrastructure:
    ```bash
@@ -44,6 +46,34 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
 
    ```bash
    curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,49.420318&server=http://ors-app:8080/ors/v2/'
+   ```
+
+### Using Kubernetes:
+
+1. Build a Kubernetes cluster & deploy a Load Balancer integration. I use TKS & MetalLB.
+
+2. Modify the Kustomization overlay as per your environment and deploy the Navigation Service & OpenRouteService to Kubernetes. 
+
+   ```bash
+   kubectl apply -k Kustomize/overlays/example
+   ```
+
+3. Wait for OpenRouteService to be available. This may take several minutes. You can ensure it is running by tailing the logs:
+
+   ```bash
+   kubectl logs -f -n nav-svc ors-app-#########-#####
+   ```
+
+4. Ensure that the Navigation Service has a Load Balancer configured properly. `EXTERNAL-IP` should be populated.
+
+   ```bash
+   kubectl get svc -n nav-svc nav-svc
+   ```
+
+5. Issue a request to the Navigation Service, specifying the `start` and `end` coordinates as well as the OpenRouteService API Server:
+
+   ```bash
+   curl 'http://192.168.50.200:5000/directions?start=8.681495,49.41461&end=8.687872,49.420318&server=http://ors-app:8080/ors/v2/'
    ```
 
 ### Using the API:
