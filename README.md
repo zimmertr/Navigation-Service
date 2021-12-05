@@ -76,7 +76,7 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
    curl 'http://192.168.50.200:5000/directions?start=8.681495,49.41461&end=8.687872,49.420318&server=http://ors-app:8080/ors/v2/'
    ```
 
-### Using the API:
+### Using Python & Flask
 
 1. Install the requirements:
 
@@ -97,7 +97,7 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
    ```bash
    curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,49.420318&server=http://localhost:8080/ors/v2/'
    ```
-### Using the CLI:
+### Using Python:
 
 1. Install the requirements:
 
