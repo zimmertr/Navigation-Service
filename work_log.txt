@@ -37,3 +37,10 @@
 01:30PM
 	- Testing & Updating README
 	- Pushing changes to GitHub
+
+01:50PM
+	- Building Kubernetes manifests & Kustomization
+	- Troubleshooting networking issues (Accidentally added the same label to both deployments with Kustomize and made my LB service attach to both :facepalm:)
+	- Testing app on Kubernetes
+	- Updating documentation
+	- Pushing changes to GitHub
