@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: "nav-svc"
+spec:
+  hosts:
+    - nav.svc
+  gateways:
+    - nav-svc
+  http:
+    - match:
+      - uri:
+          prefix: "/"
+      route:
+        - destination:
+            host: "nav-svc"
+            port:
+              number: 5000
