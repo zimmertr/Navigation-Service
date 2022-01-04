@@ -115,10 +115,10 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
 
 2. Ensure that you have access to an instance of OpenRouteService.
 
-2. Use Python 3 to call `app.py` and pass any necessary arguments. 
+2. Use Python 3 to call `cli.py` and pass any necessary arguments. 
 
    ```bash
-   python3 app.py $start $end $server
+   python3 cli.py $start $end $server
    ```
 
 ## Arguments
