@@ -8,3 +8,7 @@ patchesStrategicMerge:
   - dep_nav.yml
   - dep_ors.yml
   - svc_nav.yml
+
+# resources:
+#   - gw.yml
+#   - vs.yml
