@@ -80,7 +80,7 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
    kubectl apply -k Kustomize/overlays/example
    ```
 
-3. Wait for OpenRouteService to be available. This may take several minutes. You can ensure it is running by tailing the logs:
+3. Wait for OpenRouteService to be available. This may take several minutes. A `readinessProbe` will release it when it is. You can ensure it is running by tailing the logs:
 
    ```bash
    kubectl logs -f -n nav-svc ors-app-#########-#####
