@@ -37,23 +37,37 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
 
 ## Instructions
 
-### Using Docker & Docker-Compose:
+### Using Docker & Docker-Compose with NGINX:
 
+1. Generate an SSL certificate & private key using `openssl`:
+   
+   ```bash
+   openssl req -nodes -x509 -newkey rsa:4096 -keyout nginx/key.pem -out nginx/cert.pem -sha256 -days 9999 -subj '/CN=nav.svc'
+   ```
+   
+1. Create a DNS entry for `nav.svc` & `ors.svc`:
+   
+   ```bash
+   echo "127.0.0.1    nav.svc" | sudo tee -a /etc/hosts
+   echo "127.0.0.1    ors.svc" | sudo tee -a /etc/hosts
+   ```
+   
 1. Build & run the infrastructure:
+   
    ```bash
    docker-compose up -d
    ```
-
+   
 2. Wait for OpenRouteService to be available. This may take several minutes. You may test it with `curl`. If it responds `52`, it likely is not ready yet.
 
    ```bash
-   curl 'http://localhost:8080/ors/v2/directions/driving-car?start=8.681495,49.41461&end=8.687872,49.420318'
+   curl 'http://ors.svc:8080/ors/v2/directions/driving-car?start=8.681495,49.41461&end=8.687872,49.420318'
    ```
 
 3. Issue a request to the Navigation Service, specifying the `start` and `end` coordinates as well as the OpenRouteService API Server:
 
    ```bash
-   curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,49.420318&server=http://ors-app:8080/ors/v2/'
+   curl -k 'https://nav.svc/directions?start=8.681495,49.41461&end=8.687872,49.420318&server=http://ors-app:8080/ors/v2/'
    ```
 
 ### Using Kubernetes:
@@ -115,10 +129,10 @@ $> curl 'http://localhost:5000/directions?start=8.681495,49.41461&end=8.687872,4
 
 2. Ensure that you have access to an instance of OpenRouteService.
 
-2. Use Python 3 to call `app.py` and pass any necessary arguments. 
+2. Use Python 3 to call `cli.py` and pass any necessary arguments. 
 
    ```bash
-   python3 app.py $start $end $server
+   python3 cli.py $start $end $server
    ```
 
 ## Arguments

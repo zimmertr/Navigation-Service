@@ -1,14 +1,31 @@
 version: '3.9'
 services:
+  nginx:
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    image: nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx:/etc/nginx
   ors-app:
     container_name: ors-app
     ports:
       - 8080:8080
     image: openrouteservice/openrouteservice
+    restart: unless-stopped
     user: "${ORS_UID:-0}:${ORS_GID:-0}"
   nav-svc:
     container_name: nav-svc
     ports:
       - 5000:5000
     image: navigation-service
+    restart: unless-stopped
     build: .
+  # rails-svc:
+  #   container_name: rails-svc
+  #   ports:
+  #     - 3000:3000
+  #   image: rails-svc
+  #   restart: unless-stopped
